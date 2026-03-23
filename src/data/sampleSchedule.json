@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "희망근무를 위한 사고자 파악",
+    "year": 2025,
+    "month": 4,
+    "vacationWarningThreshold": 3,
+    "activeSite": "대응단"
+  },
+  "staffDirectory": [
+    "김민준",
+    "이서연",
+    "박도윤",
+    "최하은",
+    "정시우",
+    "강지우",
+    "조예준",
+    "윤채원",
+    "임준호",
+    "한수아",
+    "오태양",
+    "신유진",
+    "권민석",
+    "배지훈",
+    "남다은"
+  ],
+  "schedules": {
+    "대응단": [
+      {
+        "id": "sample-v1",
+        "dateKey": "2025-04-03",
+        "shift": "day",
+        "role": "paramedic",
+        "accidentName": "김민준",
+        "overtimeName": "",
+        "workplace": "본부",
+        "approved": true
+      },
+      {
+        "id": "sample-d1",
+        "dateKey": "2025-04-03",
+        "shift": "day",
+        "role": "driver",
+        "accidentName": "",
+        "overtimeName": "이서연",
+        "workplace": "2센터",
+        "approved": true
+      },
+      {
+        "id": "sample-both",
+        "dateKey": "2025-04-03",
+        "shift": "night",
+        "role": "paramedic",
+        "accidentName": "박도윤",
+        "overtimeName": "최하은",
+        "workplace": "",
+        "approved": true
+      },
+      {
+        "id": "sample-v2",
+        "dateKey": "2025-04-07",
+        "shift": "day",
+        "role": "paramedic",
+        "accidentName": "정시우",
+        "overtimeName": "",
+        "workplace": "본부",
+        "approved": true
+      }
+    ],
+    "화곡": [],
+    "발산": [],
+    "방화": [],
+    "개화": [],
+    "마곡": []
+  }
+}
