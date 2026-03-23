@@ -21,17 +21,14 @@ export default function ShiftCalendar({ year, month, entries, onCellClick, title
           <p className="mt-0.5 text-[11px] text-slate-500 sm:text-sm">
             {year}년 {month}월 · 셀을 눌러 입력
           </p>
-          <p className="mt-1 flex items-center justify-center gap-1 text-[10px] text-slate-400 sm:hidden">
-            <span className="tabular-nums" aria-hidden>
-              ↔
-            </span>
-            좌우로 밀어 전체 달력을 볼 수 있어요
+          <p className="mt-1 hidden text-[10px] text-slate-400 sm:block">
+            넓은 화면에서는 가로로 밀어 전체 달력을 볼 수 있어요
           </p>
         </div>
       )}
 
-      <div className="calendar-scroll touch-pan-x overflow-x-auto">
-        <table className="w-full min-w-[640px] border-collapse text-left text-sm sm:min-w-[720px]">
+      <div className="max-sm:overflow-x-visible sm:calendar-scroll sm:overflow-x-auto">
+        <table className="w-full border-collapse text-left max-sm:table-fixed max-sm:min-w-0 max-sm:text-[10px] sm:min-w-[720px] sm:text-sm">
         <thead>
           <tr>
             <th className="sticky left-0 z-20 w-12 border border-slate-200 bg-slate-100 px-0.5 py-2 text-center text-[10px] font-semibold text-slate-600 shadow-[4px_0_12px_-4px_rgba(0,0,0,0.12)] sm:w-14 sm:px-1 sm:text-xs sm:shadow-none">
@@ -119,9 +116,9 @@ export default function ShiftCalendar({ year, month, entries, onCellClick, title
                           })
                         }
                       >
-                        <div className="flex min-h-[5rem] flex-col sm:min-h-[4.5rem]">
+                        <div className="flex min-h-[3.75rem] flex-col sm:min-h-[4.5rem]">
                           <div
-                            className="flex min-h-[2.5rem] flex-1 basis-0 items-center justify-center break-words border-b border-slate-300/50 px-0.5 py-1 text-center text-[9px] leading-snug text-slate-900 sm:min-h-0 sm:px-1 sm:py-1.5 sm:text-xs"
+                            className="flex min-h-8 flex-1 basis-0 items-center justify-center break-words border-b border-slate-300/50 px-0.5 py-0.5 text-center text-[9px] leading-tight text-slate-900 sm:min-h-0 sm:px-1 sm:py-1.5 sm:text-xs"
                             style={
                               accidentText
                                 ? { backgroundColor: VACATION_BG }
@@ -131,7 +128,7 @@ export default function ShiftCalendar({ year, month, entries, onCellClick, title
                             {accidentText}
                           </div>
                           <div
-                            className="flex min-h-[2.5rem] flex-1 basis-0 items-center justify-center break-words px-0.5 py-1 text-center text-[9px] leading-snug text-slate-900 sm:min-h-0 sm:px-1 sm:py-1.5 sm:text-xs"
+                            className="flex min-h-8 flex-1 basis-0 items-center justify-center break-words px-0.5 py-0.5 text-center text-[9px] leading-tight text-slate-900 sm:min-h-0 sm:px-1 sm:py-1.5 sm:text-xs"
                             style={
                               overtimeText
                                 ? { backgroundColor: OVERTIME_BG }

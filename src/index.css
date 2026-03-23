@@ -9,7 +9,7 @@ body {
   min-height: 100dvh;
   min-height: 100svh;
   font-family: system-ui, 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 #root {
@@ -17,10 +17,15 @@ body {
   min-height: 100svh;
 }
 
-/* 달력 가로 스크롤: 모바일 관성·바운스 완화 */
+/*
+ * 가로 스크롤 영역: pan-x만 쓰면 모바일에서 세로 스크롤이 막힘.
+ * pan-x pan-y로 가로·세로 모두 브라우저에 넘겨 페이지 스크롤이 자연스럽게 됨.
+ */
 .calendar-scroll {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+  touch-action: pan-x pan-y;
   scrollbar-width: thin;
 }
 
