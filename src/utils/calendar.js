@@ -15,20 +15,35 @@ export function toDateKey(year, month, day) {
  * @returns {(null | { day: number, dateKey: string })[][]}
  */
 export function buildMonthGrid(year, month) {
-  const first = new Date(year, month - 1, 1)
-  const lastDay = new Date(year, month, 0).getDate()
+  const y = Number(year)
+  const m = Number(month)
+  const now = new Date()
+  const safeY = Number.isFinite(y) ? y : now.getFullYear()
+  const safeM =
+    Number.isFinite(m) && m >= 1 && m <= 12 ? m : now.getMonth() + 1
+
+  const first = new Date(safeY, safeM - 1, 1)
+  const lastDay = new Date(safeY, safeM, 0).getDate()
   const startPad = first.getDay()
+
+  if (!Number.isFinite(lastDay) || lastDay < 1) {
+    return [Array.from({ length: 7 }, () => null)]
+  }
 
   const cells = []
   for (let i = 0; i < startPad; i++) cells.push(null)
 
   for (let d = 1; d <= lastDay; d++) {
-    cells.push({ day: d, dateKey: toDateKey(year, month, d) })
+    cells.push({ day: d, dateKey: toDateKey(safeY, safeM, d) })
   }
 
   const weeks = []
   for (let i = 0; i < cells.length; i += 7) {
     weeks.push(cells.slice(i, i + 7))
+  }
+
+  if (weeks.length === 0) {
+    return [Array.from({ length: 7 }, () => null)]
   }
 
   const last = weeks[weeks.length - 1]

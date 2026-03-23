@@ -31,10 +31,17 @@ export default function App() {
   const saveTimer = useRef(null)
   const remoteTimer = useRef(null)
 
-  const { meta, staffDirectory, schedules } = data ?? {}
-  const { year, month, title, vacationWarningThreshold } = meta ?? {}
+  const { meta: metaRaw, staffDirectory: staffRaw, schedules } = data ?? {}
+  const meta =
+    metaRaw && typeof metaRaw === 'object' ? metaRaw : sampleSchedule.meta
+  const staffDirectory = Array.isArray(staffRaw) ? staffRaw : sampleSchedule.staffDirectory
+  const year = Number(meta.year) || sampleSchedule.meta.year
+  const month = Number(meta.month) || sampleSchedule.meta.month
+  const title = typeof meta.title === 'string' ? meta.title : sampleSchedule.meta.title
+  const vacationWarningThreshold =
+    Number(meta.vacationWarningThreshold) || sampleSchedule.meta.vacationWarningThreshold
 
-  const activeSite = isValidSite(meta?.activeSite) ? meta.activeSite : DEFAULT_SITE
+  const activeSite = isValidSite(meta.activeSite) ? meta.activeSite : DEFAULT_SITE
   const entries = useMemo(
     () => (schedules ? schedules[activeSite] ?? [] : []),
     [schedules, activeSite]
@@ -189,7 +196,7 @@ export default function App() {
     const a = document.createElement('a')
     a.href = URL.createObjectURL(blob)
     const siteSafe = activeSite.replace(/\s+/g, '-')
-    a.download = `schedule-${meta.year}-${String(meta.month).padStart(2, '0')}-${siteSafe}.json`
+    a.download = `schedule-${year}-${String(month).padStart(2, '0')}-${siteSafe}.json`
     a.click()
     URL.revokeObjectURL(a.href)
   }
@@ -211,14 +218,11 @@ export default function App() {
     e.target.value = ''
   }
 
-  const monthLabel = useMemo(
-    () => `${meta.year}년 ${meta.month}월`,
-    [meta.year, meta.month]
-  )
+  const monthLabel = useMemo(() => `${year}년 ${month}월`, [year, month])
 
   const prevMonth = () => {
-    let y = meta.year
-    let m = meta.month - 1
+    let y = year
+    let m = month - 1
     if (m < 1) {
       m = 12
       y -= 1
@@ -227,8 +231,8 @@ export default function App() {
   }
 
   const nextMonth = () => {
-    let y = meta.year
-    let m = meta.month + 1
+    let y = year
+    let m = month + 1
     if (m > 12) {
       m = 1
       y += 1

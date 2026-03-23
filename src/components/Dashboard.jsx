@@ -9,12 +9,13 @@ function todayKey() {
 }
 
 export default function Dashboard({ entries, adminMode }) {
+  const list = Array.isArray(entries) ? entries : []
   const key = todayKey()
-  const todayEntries = entries.filter((e) => e.dateKey === key)
+  const todayEntries = list.filter((e) => e.dateKey === key)
 
   const vacationCount = todayEntries.filter((e) => entryAccidentName(e)).length
   const overtimeFilled = todayEntries.filter((e) => entryOvertimeName(e)).length
-  const pendingAll = entries.filter((e) => e.approved === false).length
+  const pendingAll = list.filter((e) => e.approved === false).length
 
   return (
     <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-3">

@@ -11,5 +11,9 @@ export function loadSchedule() {
 }
 
 export function saveSchedule(data) {
-  localStorage.setItem(KEY, JSON.stringify(data))
+  try {
+    localStorage.setItem(KEY, JSON.stringify(data))
+  } catch {
+    /* 할당량·사생활 보호 모드 등 */
+  }
 }
